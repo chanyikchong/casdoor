@@ -952,7 +952,7 @@ class LoginPage extends React.Component {
 
   sendSilentSigninData(data) {
     if (Setting.inIframe()) {
-      const message = {tag: "Casdoor", type: "SilentSignin", data: data};
+      const message = {tag: "Simon", type: "SilentSignin", data: data};
       window.parent.postMessage(message, "*");
     }
   }

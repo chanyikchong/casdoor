@@ -30,4 +30,5 @@ export const ThemeDefault = {
   isCompact: false,
 };
 
-export const CustomFooter = null;
+// export const CustomFooter = null;
+export const CustomFooter = "";

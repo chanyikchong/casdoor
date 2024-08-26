@@ -28,7 +28,8 @@ import moment from "moment";
 
 const {Option} = Select;
 
-export const ServerUrl = "";
+// export const ServerUrl = "https://seeng.w3ddns.it/auth";
+export const ServerUrl = "https://authseeng.w3ddns.it";
 
 export const StaticBaseUrl = "https://cdn.casbin.org";
 
@@ -1474,7 +1475,8 @@ export function getUserCommonFields() {
 }
 
 export function getDefaultFooterContent() {
-  return "Powered by <a target=\"_blank\" href=\"https://casdoor.org\" rel=\"noreferrer\"><img style=\"padding-bottom: 3px\" height=\"20\" alt=\"Casdoor\" src=\"https://cdn.casbin.org/img/casdoor-logo_1185x256.png\"/></a>";
+  // return "Powered by <a target=\"_blank\" href=\"https://casdoor.org\" rel=\"noreferrer\"><img style=\"padding-bottom: 3px\" height=\"20\" alt=\"Casdoor\" src=\"https://cdn.casbin.org/img/casdoor-logo_1185x256.png\"/></a>";
+  return "";
 }
 
 export function getEmptyFooterContent() {
