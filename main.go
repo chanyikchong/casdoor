@@ -16,6 +16,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/beego/beego"
 	"github.com/beego/beego/logs"
@@ -71,7 +72,10 @@ func main() {
 		beego.BConfig.WebConfig.Session.SessionProviderConfig = conf.GetConfigString("redisEndpoint")
 	}
 	beego.BConfig.WebConfig.Session.SessionCookieLifeTime = 3600 * 24 * 30
-	// beego.BConfig.WebConfig.Session.SessionCookieSameSite = http.SameSiteNoneMode
+	// SameSite=Lax + no Secure works on http://localhost.  (None would require Secure=true,
+	// which we don't have on plain-HTTP localhost.)  Without an explicit SameSite some Chrome
+	// builds refuse to persist the cookie even though Lax is the documented default.
+	beego.BConfig.WebConfig.Session.SessionCookieSameSite = http.SameSiteLaxMode
 
 	err := logs.SetLogger(logs.AdapterFile, conf.GetConfigString("logConfig"))
 	if err != nil {

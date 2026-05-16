@@ -28,7 +28,13 @@ import moment from "moment";
 
 const {Option} = Select;
 
-export const ServerUrl = "";
+// ServerUrl auto-detects: when served from localhost (dev), it uses the same
+// origin (e.g. http://localhost:7001). When served from anywhere else (prod
+// behind authseeng.w3ddns.it), it falls back to the production hostname. This
+// avoids needing two builds for dev vs prod.
+export const ServerUrl = (typeof window !== "undefined" && window.location.hostname === "localhost")
+  ? window.location.origin
+  : "https://authseeng.w3ddns.it";
 
 export const StaticBaseUrl = "https://cdn.casbin.org";
 
@@ -450,11 +456,11 @@ export function isLocalhost() {
 }
 
 export function getFullServerUrl() {
-  let fullServerUrl = window.location.origin;
-  if (fullServerUrl === "http://localhost:7001") {
-    fullServerUrl = "http://localhost:8000";
-  }
-  return fullServerUrl;
+  // Upstream Casdoor's dev setup uses a React dev server on :7001 proxied to a
+  // Go backend on :8000, and rewrites the URL to expose the backend port.  Our
+  // build collapses both into the Go binary on :7001, so the rewrite would
+  // point at a non-existent :8000.  Just return the origin verbatim.
+  return window.location.origin;
 }
 
 export function isProviderVisible(providerItem) {
@@ -1481,7 +1487,8 @@ export function getUserCommonFields() {
 }
 
 export function getDefaultFooterContent() {
-  return "Powered by <a target=\"_blank\" href=\"https://casdoor.org\" rel=\"noreferrer\"><img style=\"padding-bottom: 3px\" height=\"20\" alt=\"Casdoor\" src=\"https://cdn.casbin.org/img/casdoor-logo_1185x256.png\"/></a>";
+  // return "Powered by <a target=\"_blank\" href=\"https://casdoor.org\" rel=\"noreferrer\"><img style=\"padding-bottom: 3px\" height=\"20\" alt=\"Casdoor\" src=\"https://cdn.casbin.org/img/casdoor-logo_1185x256.png\"/></a>";
+  return "";
 }
 
 export function getEmptyFooterContent() {
