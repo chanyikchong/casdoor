@@ -231,7 +231,7 @@ class LoginPage extends React.Component {
     case "verificationCodeEmail": return i18next.t("login:Email");
     case "verificationCodePhone": return i18next.t("login:Phone");
     case "ldap": return i18next.t("login:LDAP username, Email or phone");
-    default: return i18next.t("login:username, Email or phone");
+    default: return i18next.t("login:Email");
     }
   }
 
@@ -952,7 +952,7 @@ class LoginPage extends React.Component {
 
   sendSilentSigninData(data) {
     if (Setting.inIframe()) {
-      const message = {tag: "Casdoor", type: "SilentSignin", data: data};
+      const message = {tag: "Simon", type: "SilentSignin", data: data};
       window.parent.postMessage(message, "*");
     }
   }

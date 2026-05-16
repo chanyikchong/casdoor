@@ -18,8 +18,8 @@ import "github.com/casdoor/oss"
 
 func GetStorageProvider(providerType string, clientId string, clientSecret string, region string, bucket string, endpoint string) (oss.StorageInterface, error) {
 	switch providerType {
-	case "Local File System":
-		return NewLocalFileSystemStorageProvider(), nil
+	// case "Local File System":
+	// 	return NewLocalFileSystemStorageProvider(), nil
 	case "AWS S3":
 		return NewAwsS3StorageProvider(clientId, clientSecret, region, bucket, endpoint), nil
 	case "MinIO":

@@ -34,7 +34,7 @@ const (
 	ProviderTypeGoogleCloudStorage = "Google Cloud Storage"
 	ProviderTypeTencentCloudCOS    = "Tencent Cloud COS"
 	ProviderTypeAzureBlob          = "Azure Blob"
-	ProviderTypeLocalFileSystem    = "Local File System"
+	// ProviderTypeLocalFileSystem    = "Local File System"
 )
 
 func init() {
@@ -87,13 +87,13 @@ func GetUploadFileUrl(provider *Provider, fullFilePath string, hasTimestamp bool
 	objectKey := util.UrlJoin(util.GetUrlPath(provider.Domain), escapedPath)
 
 	host := ""
-	if provider.Type != ProviderTypeLocalFileSystem {
-		// provider.Domain = "https://cdn.casbin.com/casdoor/"
-		host = util.GetUrlHost(provider.Domain)
-	} else {
-		// provider.Domain = "http://localhost:8000" or "https://door.casdoor.com"
-		host = util.UrlJoin(provider.Domain, "/files")
-	}
+	// if provider.Type != ProviderTypeLocalFileSystem {
+	// 	// provider.Domain = "https://cdn.casbin.com/casdoor/"
+	// 	host = util.GetUrlHost(provider.Domain)
+	// } else {
+	// 	// provider.Domain = "http://localhost:8000" or "https://door.casdoor.com"
+	// 	host = util.UrlJoin(provider.Domain, "/files")
+	// }
 	if provider.Type == ProviderTypeAzureBlob || provider.Type == ProviderTypeGoogleCloudStorage {
 		host = util.UrlJoin(host, provider.Bucket)
 	}

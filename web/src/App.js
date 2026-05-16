@@ -279,19 +279,19 @@ class App extends Component {
             textAlign: "center",
           }
         }>
-          {
-            this.state.application?.footerHtml && this.state.application.footerHtml !== "" ?
-              <React.Fragment>
-                <div dangerouslySetInnerHTML={{__html: this.state.application.footerHtml}} />
-              </React.Fragment>
-              : (
-                Conf.CustomFooter !== null ? Conf.CustomFooter : (
-                  <React.Fragment>
-                  Powered by <a target="_blank" href="https://casdoor.org" rel="noreferrer"><img style={{paddingBottom: "3px"}} height={"20px"} alt={"Casdoor"} src={this.state.logo} /></a>
-                  </React.Fragment>
-                )
-              )
-          }
+          {/* {*/}
+          {/*  this.state.application?.footerHtml && this.state.application.footerHtml !== "" ?*/}
+          {/*    <React.Fragment>*/}
+          {/*      <div dangerouslySetInnerHTML={{__html: this.state.application.footerHtml}} />*/}
+          {/*    </React.Fragment>*/}
+          {/*    : (*/}
+          {/*      Conf.CustomFooter !== null ? Conf.CustomFooter : (*/}
+          {/*        <React.Fragment>*/}
+          {/*        Powered by <a target="_blank" href="https://casdoor.org" rel="noreferrer"><img style={{paddingBottom: "3px"}} height={"20px"} alt={"Casdoor"} src={this.state.logo} /></a>*/}
+          {/*        </React.Fragment>*/}
+          {/*      )*/}
+          {/*    )*/}
+          {/* }*/}
         </Footer>
       </React.Fragment>
     );
@@ -493,7 +493,8 @@ class App extends Component {
       <React.Fragment>
         {(this.state.account === undefined || this.state.account === null) ?
           <Helmet>
-            <link rel="icon" href={"https://cdn.casdoor.com/static/favicon.png"} />
+            <title>Simon</title>
+            {/* <link rel="icon" href={"https://cdn.casdoor.com/static/favicon.png"} /> */}
           </Helmet> :
           <Helmet>
             <title>{this.state.account.organization?.displayName}</title>

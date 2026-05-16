@@ -498,7 +498,23 @@ func (c *ApiController) SetPassword() {
 
 	isAdmin := c.IsAdmin()
 	if isAdmin {
-		if oldPassword != "" {
+		isSelf := requestUserId == userId
+		// check is changing own password or other user's password
+		if !isSelf {
+			// admin changing other user's password does not need to provide old password
+			if oldPassword != "" {
+				err = object.CheckPassword(targetUser, oldPassword, c.GetAcceptLanguage())
+				if err != nil {
+					c.ResponseError(err.Error())
+					return
+				}
+			}
+		} else {
+			// admin changing own password needs to provide old password
+			if oldPassword == "" {
+				c.ResponseError("The old password is required to change your password.")
+				return
+			}
 			err = object.CheckPassword(targetUser, oldPassword, c.GetAcceptLanguage())
 			if err != nil {
 				c.ResponseError(err.Error())
@@ -506,6 +522,15 @@ func (c *ApiController) SetPassword() {
 			}
 		}
 	} else if code == "" {
+		// err = object.CheckPassword(targetUser, oldPassword, c.GetAcceptLanguage())
+		// if err != nil {
+		// 	c.ResponseError(err.Error())
+		// 	return
+		// }
+		if oldPassword == "" {
+			c.ResponseError("The old password is required to change your password.")
+			return
+		}
 		err = object.CheckPassword(targetUser, oldPassword, c.GetAcceptLanguage())
 		if err != nil {
 			c.ResponseError(err.Error())
